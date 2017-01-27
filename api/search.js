@@ -1,7 +1,6 @@
 "use strict";
-const creds = require("./credentials.js");
-const api_key = process.env.API_KEY || creds.API_KEY;
-const cse_id = process.env.CSE_ID || creds.CSE_ID;
+const api_key = process.env.API_KEY || require("./credentials.js").API_KEY;
+const cse_id = process.env.CSE_ID || require("./credentials.js").CSE_ID;
 const https = require('https');
 const accessDB = require("./accessDB.js");
 
