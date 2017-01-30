@@ -12,14 +12,14 @@ Image Search Abstraction Layer for FreeCodeCamps API Projects
 ```
 ### Output:
 An array containing 10 objects. Each object represents an image.  
-If you want, you can use the offset-parameter with a nr `n`. The first image in the array will be the `n`th search result.  
+If you use the offset-parameter with a nr `n`. The first image in the array will be the `n`th search result.  
 An example object:
 ```
 {
     snippet:  "freeCodeCamp",
-    imageURL: "https://avatars0.githubusercontent.com/u/9892522?v=3&s=200",
+    imageURL: "https://avatars0.githubusercontent.com/...",
     siteURL:  "https://github.com/FreeCodeCamp",
-    thumbnail:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDt-65rSRLA4wlR_Qg4ZrKN3OhITsgQ6Pcg7f3kJhg5oqv3ouJ1A5lU1U"
+    thumbnail:"https://encrypted-tbn0.gstatic.com/images?..."
 }
 ```
 
