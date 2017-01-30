@@ -1,7 +1,6 @@
 "use strict";
 const mongo = require("mongodb").MongoClient;
 const db_url = process.env.DB_URL || require("./credentials.js").DB_URL;
-const parseTime = require("./parseTime.js");
 
 let database = null;
 const open = function () {
@@ -16,26 +15,24 @@ const insert = function (searchString, date) {
     open().then(coll => {
         coll.insert({
             "term": searchString,
-            "UTC_Time": new Date(date).getTime(),
+            "date": date,                                   // We use the String representation from Google Response
+            "timestamp": new Date(date).getTime() / 1000,   // Seconds since 1. January 1970 00:00:00 UTC
         });
         database.close();
     });
 };
 
 const history = function () {
-    return  open().then(coll => {
-                return coll.find({},{_id: 0}).sort({UTC_Time: -1}).limit(10).toArray();
+    return  open()
+            .then(coll => {
+                return coll.find({},{_id: 0})       // Get all searches
+                           .sort({timestamp: -1})   // Sort them new -> to
+                           .limit(10)               // return only the last 10
+                           .toArray();
             })
             .then(arr => {
-                const final = [];
-                for (let i = 0; i < arr.length; i++) {
-                    final.push({
-                        "searched for": arr[i].term,
-                        "on": parseTime(arr[i].UTC_Time)
-                    });
-                }
                 database.close();
-                return final;
+                return arr;
             });
 };
 
